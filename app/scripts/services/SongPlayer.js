@@ -9,7 +9,7 @@
         var currentAlbum = Fixtures.getAlbum();
         
         /** private attribute
-        * @desc Buzz object audio file
+        * @desc set the state of the buzz object audio file to null
         * @type {Object}
         */
         var currentBuzzObject = null;
