@@ -2,19 +2,19 @@
     function SongPlayer($rootScope, Fixtures) {
         var SongPlayer = {};
         
-        /** private attribute
-        * @desc Album
+        /** ----- PRIVATE ATTRIBUTES -----
+        * @desc info for current album
         * @type {Object}
         */
         var currentAlbum = Fixtures.getAlbum();
         
-        /** private attribute
-        * @desc set the state of the buzz object audio file to null
+        /**
+        * @desc buzz object audio file
         * @type {Object}
         */
         var currentBuzzObject = null;
         
-        /** private function
+        /** ----- PRIVATE FUNCTIONS -----
         * @function setSong
         * @desc stops currently playing song and loads new audio file as currentBuzzObject
         * @param {Object} song
@@ -39,46 +39,58 @@
             SongPlayer.currentSong = song;
         };
         
+        /**
+        * @function playSong
+        * @desc     play a song
+        * @param    {Object} song 
+        */
         var playSong = function(song) {
             currentBuzzObject.play();
             song.playing = true;
             SongPlayer.currentSong = song;
         };
         
-        /** private function
-        * @function getSongIndex
-        * @desc gets index from song from album
-        * @param 
-        */  
-        var getSongIndex = function(song) {
-            return currentAlbum.songs.indexOf(song);
-        };
-        
-        /** private function
+        /**
         * @function stopSong
-        * @desc stops current Buzz object,
-        * @param 
+        * @desc     stop a song
+        * @param    {Object} song
         */
         var stopSong = function() {
             currentBuzzObject.stop()
             SongPlayer.currentSong.playing = null;
         };
         
-        /** public attribute 
-        * @desc Active song object from list of songs
+        /**
+        * @function getSongIndex
+        * @desc     gets index from song from album
+        * @param    {Object} song
+        * @return   {Number}
+        */  
+        var getSongIndex = function(song) {
+            return currentAlbum.songs.indexOf(song);
+        };
+        
+        /** ----- PUBLIC ATTRIBUTES ----- 
+        * @desc active song object from list of songs
         * @type {Object}
         */
         SongPlayer.currentSong = null;
         
-        /*
-        * @desc current playback time (in seconds) of currently playing song
-        * @type {number}
+        /* 
+        * @desc current play time (in seconds) of currently playing song
+        * @type {Number}
         */
         SongPlayer.currentTime = null;
         
-        /** public method
+        /*
+        * @desc volume used for songs
+        * @type {Number}
+        */
+        SongPlayer.volume = 100;
+        
+        /** ----- PUBLIC METHODS -----
         * @function play
-        * @desc Play current or new song
+        * @desc play current or new song
         * @param {Object} song
         */
         SongPlayer.play = function(song) {
@@ -93,9 +105,9 @@
             }
         };
         
-        /** public method
+        /**
         * @function pause
-        * @desc Pause current
+        * @desc pause current song
         * @param {Object} song
         */
         SongPlayer.pause = function(song) {
@@ -107,14 +119,13 @@
         /** public method
         * @function previous
         * @desc decrease song index by 1
-        * @param {Object} song
         */
         SongPlayer.previous = function() {
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex--;
             
             if (currentSongIndex < 0) {
-                stopSong();
+                stopSong(SongPlayer.currentSong);
             } else {
                 var song = currentAlbum.songs[currentSongIndex];
                 setSong(song);
@@ -122,17 +133,18 @@
             }
         };
         
-        /** public method
+        /**
         * @function next
-        * @desc increase song index by 1
-        * @param {Object} song
+        * @desc set song to next song in album
         */
         SongPlayer.next = function() {
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex++;
             
-            if (currentSongIndex === currentAlbum.songs.length) {
-                stopSong();
+            var lastSongIndex = currentAlbum.songs.length - 1;
+            
+            if (currentSongIndex > lastSongIndex) {
+                stopSong(SongPlayer.currentSong);
             } else {
                 var song = currentAlbum.songs[currentSongIndex];
                 setSong(song);
@@ -141,14 +153,26 @@
         };
         
         /*
-        * @function setCurrentTime method
+        * @function setCurrentTime
         * @desc     set current time (in seconds) of currently playing song
-        * @type     {number} time
+        * @type     {Number} time
         */
         SongPlayer.setCurrentTime = function(time) {
             if (currentBuzzObject) {
                 currentBuzzObject.setTime(time);
             }
+        };
+        
+        /*
+        * @function setCurrentVolume
+        * @desc     set volume for songs
+        * @type     {Number} volume
+        */
+        SongPlayer.setVolume = function(volume) {
+            if (currentBuzzObject) {
+                currentBuzzObject.setVolume(volume);
+            }
+            SongPlayer.volume = volume;
         };
         
         return SongPlayer;
