@@ -1,8 +1,6 @@
 <h1>Auditory</h1>
 
-<p>Auditory is a music streaming application built with AngularJS. Songs are accessed via albums in the collection.</p>
-
-<p>Auditory is a refactored version of Bloc Jams, which was originally written in Javascript and jQuery.</p>
+<p>Auditory is a music streaming application built with AngularJS. Songs are accessed via albums in the collection. It is a refactored version of Bloc Jams, which was originally written in Javascript and jQuery.</p>
 
 <h3>User Stories</h3>
 
