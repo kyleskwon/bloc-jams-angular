@@ -1,6 +1,6 @@
 (function() {
     function LandingCtrl() {
-        this.heroTitle = "Pump Up The Jam";
+        this.heroTitle = "Auditory";
     }
     
     angular
