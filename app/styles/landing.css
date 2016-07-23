@@ -29,14 +29,26 @@ body.landing {
 .hero-title {
     font-size: 2.5rem !important;
 }
-@media (min-width: 340px) and (max-width: 639px) {
+@media (min-width: 340px) and (max-width: 489px) {
     .hero-title {
         font-size: 3.5rem !important;
     }
 }
-@media (min-width: 640px) {
+@media (min-width: 490px) and (max-width: 639px) {
     .hero-title {
-        font-size: 5rem !important;
+        font-size: 4.5rem !important;
+    }
+}
+@media (min-width: 640px) and (max-width: 789px) {
+    .hero-title {
+        font-size: 6rem !important;
+        padding-bottom: 130px;
+    }
+}
+@media (min-width: 790px) {
+    .hero-title {
+        font-size: 8rem !important;
+        padding-bottom: 170px;
     }
 }
  
